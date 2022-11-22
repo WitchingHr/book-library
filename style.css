@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* position: relative; */
+}
+
+.header {
+    /* position: sticky; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    background-color: gray;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.bookshelf {
+    flex: 1;
+    overflow: scroll;
+    background-color: lightgray;
+}
+
+.book {
+    
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    background: linear-gradient(lightgray, gray);
+}
+
+button.add {
+    height: 50%;
+}

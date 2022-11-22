@@ -1,5 +1,10 @@
+:root {
+    --bg-color: rgb(215, 245, 243);
+}
+
 body {
     margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 .container {
@@ -13,19 +18,19 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 10%;
-    background-color: lightgray;
-    box-shadow: 0 1px 3px 1x rgb(160, 21, 21);
+    background-color: var(--bg-color);
 }
 
 .logo {
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 48px;
+    font-weight: bolder;
+    margin-left: 5px;
 }
 
 .bookshelf {
     flex: 1;
     overflow: scroll;
-    background-color: lightgray;
+    background-color: var(--bg-color);
 }
 
 .book {
@@ -42,8 +47,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 10vh;
-    background-color: lightgray;
-    box-shadow: 0px -20px 20px 0px lightgrey;
+    background-color: var(--bg-color);
+    box-shadow: 0px -20px 20px 0px var(--bg-color);
 }
 
 button.add {

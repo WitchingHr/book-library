@@ -6,16 +6,15 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    /* position: relative; */
 }
 
 .header {
-    /* position: sticky; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10vh;
-    background-color: gray;
+    height: 10%;
+    background-color: lightgray;
+    box-shadow: 0 1px 3px 1x rgb(160, 21, 21);
 }
 
 .logo {
@@ -30,17 +29,31 @@ body {
 }
 
 .book {
-    
+    border: 1px solid rgb(0, 255, 247);
+    margin: 15px;
+    background: linear-gradient(to right bottom,white, rgb(123, 255, 0) 70%, rgb(0, 255, 247) 90%);
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px 0px #5d4b4b;
 }
 
 .footer {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 15vh;
-    background: linear-gradient(lightgray, gray);
+    height: 10vh;
+    background-color: lightgray;
+    box-shadow: 0px -20px 20px 0px lightgrey;
 }
 
 button.add {
     height: 50%;
+    position: relative;
+    bottom: 40px;
+    font-size: 40px;
+    line-height: 11px;
+    background: linear-gradient(blue, red);
+    color: rgb(0, 255, 166);
+    border-radius: 3px;
+    padding: 12px;
 }

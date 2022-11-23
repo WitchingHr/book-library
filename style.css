@@ -11,12 +11,40 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    position: relative;
+}
+
+.modal {
+    border: 1px solid black;
+    width: clamp(240px, 75%, 400px);
+    position: absolute;
+    top: 20%;
+    align-self: center;
+    background: white;
+    padding: 5px;
+}
+
+.text-input{
+    display: grid;
+}
+
+.radio {
+    margin-left: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+.submit-book {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     height: 10%;
     background-color: var(--bg-color);
 }
@@ -25,6 +53,10 @@ body {
     font-size: 48px;
     font-weight: bolder;
     margin-left: 5px;
+}
+
+.user {
+    margin-right: 5px;
 }
 
 .bookshelf {

@@ -1,10 +1,15 @@
 :root {
     --bg-color: rgb(215, 245, 243);
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
+}
+
+button {
+    cursor: pointer;
 }
 
 .container {
@@ -98,6 +103,50 @@ body {
     box-shadow: 1px 1px 3px 0px #5d4b4b;
 }
 
+.buttons-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.book-buttons {
+    width: clamp(86px, 30%, 120px);
+    padding: 4px;
+    border-radius: 4px;
+    font-weight: bolder;
+    font-size: 14px;
+    transition: 1s ease;
+}
+
+.read {
+    background-color: lightgreen;
+    color: green;
+    border: 3px solid rgb(119, 201, 119);
+    box-shadow: inset darkgreen;
+}
+
+.read:hover {
+    background-color: rgb(118, 197, 118);
+    color: green;
+    border: 3px solid rgb(94, 160, 94);
+}
+
+.unread {
+    background-color: red;
+    color: darkred;
+}
+
+.remove {
+    background-color: lightgray;
+    color: rgb(137, 137, 137);
+    border: 3px solid rgb(200, 199, 199);
+}
+
+.remove:hover {
+    background-color: rgb(210, 169, 169);
+    color: rgb(164, 71, 71);
+    border: 3px solid rgb(201, 149, 149);
+}
+
 .footer {
     width: 100%;
     display: flex;
@@ -105,7 +154,7 @@ body {
     align-items: center;
     height: 10vh;
     background-color: var(--bg-color);
-    box-shadow: 0px -20px 20px 0px var(--bg-color);
+    box-shadow: 0px -20px 20px 0px rgb(215, 245, 243);
 }
 
 .add {

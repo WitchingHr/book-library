@@ -123,14 +123,15 @@ button {
 }
 
 .read:hover {
+    background-color: rgb(238, 236, 144);
+    color: rgb(124, 128, 0);
+    border: 2px solid rgb(200, 201, 119);
+}
+
+.unread:hover {
     background-color: lightgreen;
     color: green;
     border: 2px solid rgb(119, 201, 119);
-}
-
-.unread {
-    background-color: red;
-    color: darkred;
 }
 
 .remove:hover {
@@ -153,4 +154,5 @@ button {
     transform: scale(0.5);
     position: relative;
     bottom: 10px;
+    cursor: pointer;
 }

@@ -117,7 +117,7 @@ button {
     font-weight: bold;
     font-size: 14px;
     color: #69ca43;
-    transition: 0.3s ;
+    /* transition: 0.3s ; */
     background: none;
     border: none;
 }

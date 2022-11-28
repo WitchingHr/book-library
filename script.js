@@ -2,7 +2,6 @@ const modal = document.querySelector('.modal-bg');
 const button = document.querySelector('.add');
 const modalScale = document.querySelector('.modal');
 
-
 button.onclick = function() {
     modal.style.display = 'block';
     modalScale.classList.add('scale');
@@ -34,18 +33,19 @@ function addBookToLibrary() {
     });
     library.push(new Book(title, author, pages, readStatus));
     populate();
-    console.log(library); // remove me
 }
 
 function populate() {
     const bookshelf = document.querySelector('.bookshelf');
+    const books = document.querySelectorAll('.book');
 
-    let books = document.querySelectorAll('.book');
+    // Delete books from DOM
     books.forEach(book => {
-        bookshelf.removeChild(book);
+        bookshelf.removeChild(book); 
     });
 
-    library.forEach(book => {
+    // Add books to DOM
+    library.forEach(book => { 
         const bk = document.createElement('div');
         bk.classList.add('book');
         bookshelf.appendChild(bk);
@@ -88,13 +88,15 @@ function populate() {
         wrapper.appendChild(remove);
         remove.addEventListener('click', (e) => removeBook(e));
     });
-    changeReadStatus();
+
+    changeReadStatus(); // Adds listeners for Read Status
 }
 
 function changeReadStatus () {
     const readStatus = document.querySelectorAll('.read-status');
 
     readStatus.forEach(book => {
+        // Change Read Status
         book.addEventListener('click', (e) => {
             const title = e.target.parentNode.parentNode.firstChild.innerHTML;
             if (e.target.classList.contains('read')) {
@@ -111,12 +113,14 @@ function changeReadStatus () {
             e.target.classList.remove('unread');
             e.target.classList.add('read');
             e.target.textContent = 'Read';
-            for (let i = 0; i < library.length; i++) {
+            for (let i = 0; i < library.length; i++) { 
                 if (library[i].title === title) {
                     library[i].read = 'yes';
                 }
             }
         });
+
+        // Preview new Read Status on hover
         book.addEventListener('mouseover', (e) => {
             if (e.target.classList.contains('read')) {
                 e.target.textContent = 'Unread';
@@ -124,6 +128,8 @@ function changeReadStatus () {
             }
             e.target.textContent = 'Read';
         });
+
+        // Revert preview
         book.addEventListener('mouseout', (e) => {
             if (e.target.classList.contains('read')) {
                 e.target.textContent = 'Read';
@@ -136,11 +142,12 @@ function changeReadStatus () {
 
 function removeBook(e) {
     const thisBook = e.target.parentNode.parentNode;
-    thisBook.classList.remove('book');
     const title = thisBook.firstChild.innerHTML;
-    console.log(title)
+
+    // Removes book from DOM
     thisBook.parentNode.removeChild(thisBook);
 
+    //Removes book from library array
     for (let i = library.length - 1; i >= 0; i--) {
         if (library[i].title === title) {
             library.splice(i, 1);
@@ -151,8 +158,12 @@ function removeBook(e) {
 const submitBook = document.querySelector('.submit-book');
 submitBook.addEventListener('click', (e) => {
     e.preventDefault();
+
     const length = library.length;
+
     addBookToLibrary();
+
+    // Closes modal after adding a book
     if (library.length > length) {
         modal.style.display = 'none';
     }

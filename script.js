@@ -27,8 +27,12 @@ function addBookToLibrary() {
     const title = document.getElementById('book-title').value;
     const author = document.getElementById('book-author').value;
     const pages = document.getElementById('book-pages').value;
-    const read = document.getElementsByName('read').value;
-    library.push(new Book(title, author, pages, read));
+    const radio = document.getElementsByName('read');
+    let readStatus = '';
+    radio.forEach(radio => {
+        if (radio.checked) readStatus = radio.value;
+    });
+    library.push(new Book(title, author, pages, readStatus));
     populate();
     console.log(library); // remove me
 }
@@ -66,10 +70,15 @@ function populate() {
         bk.appendChild(wrapper);
 
         const read = document.createElement('button');
-        read.classList.add('read');
         read.classList.add('book-buttons');
-        read.classList.add('read-status')
-        read.textContent = 'Read'; // FIX ME
+        read.classList.add('read-status');
+        if (book.read == 'yes') {
+            read.classList.add('read');
+            read.textContent = 'Read';
+        } else {
+            read.classList.add('unread');
+            read.textContent = 'Unread';
+        }
         wrapper.appendChild(read);
 
         const remove = document.createElement('button');
@@ -87,15 +96,26 @@ function changeReadStatus () {
 
     readStatus.forEach(book => {
         book.addEventListener('click', (e) => {
+            const title = e.target.parentNode.parentNode.firstChild.innerHTML;
             if (e.target.classList.contains('read')) {
                 e.target.classList.remove('read');
                 e.target.classList.add('unread');
                 e.target.textContent = 'Unread';
+                for (let i = 0; i < library.length; i++) {
+                    if (library[i].title === title) {
+                        library[i].read = 'no';
+                    }
+                }
                 return;
             }
             e.target.classList.remove('unread');
             e.target.classList.add('read');
             e.target.textContent = 'Read';
+            for (let i = 0; i < library.length; i++) {
+                if (library[i].title === title) {
+                    library[i].read = 'yes';
+                }
+            }
         });
         book.addEventListener('mouseover', (e) => {
             if (e.target.classList.contains('read')) {

@@ -17,6 +17,10 @@ window.addEventListener('keydown', (e) => {
         clearForm();
         document.getElementById('book-title').focus();
     }
+    if (e.key == 'Escape' && modal.style.display == 'block') {
+        clearForm();
+        modal.style.display = 'none';
+    }
 })
 
 // Close modal

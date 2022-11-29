@@ -123,6 +123,17 @@ input[type='radio'] {
     background-color: var(--bg-color);
 }
 
+.stats-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.stat-number {
+    color: orange;
+    font-weight: bold;
+}
+
 .book {
     border: 1px solid rgb(0, 255, 247);
     margin: 15px;

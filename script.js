@@ -61,25 +61,29 @@ toggle.addEventListener('click', () => {
 })
 
 function getStats() {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('stats-wrapper')
+    statsPage.append(wrapper);
+
     const bookTotal = document.createElement('div');
-    bookTotal.innerHTML = `Books: ${library.length}`;
-    statsPage.append(bookTotal);
+    bookTotal.innerHTML = `Books: <span class='stat-number'>${library.length}</span>`;
+    wrapper.append(bookTotal);
 
     const booksRead = document.createElement('div');
     const readBooks = function() {
         const read = library.filter(book => book.read === 'yes');
         return read.length;
     }
-    booksRead.innerHTML = `Read: ${readBooks()}`;
-    statsPage.append(booksRead);
+    booksRead.innerHTML = `Read: <span class='stat-number'>${readBooks()}</span>`;
+    wrapper.append(booksRead);
 
     const booksUnread = document.createElement('div');
     const unreadBooks = function() {
         const unread = library.filter(book => book.read === 'no');
         return unread.length;
     }
-    booksUnread.innerHTML = `Unread: ${unreadBooks()}`;
-    statsPage.append(booksUnread);
+    booksUnread.innerHTML = `Unread: <span class='stat-number'>${unreadBooks()}</span>`;
+    wrapper.append(booksUnread);
 
     const pagesRead = document.createElement('div');
     const totalPages = function() {
@@ -89,8 +93,8 @@ function getStats() {
         }, 0);
         return pages;
     };
-    pagesRead.innerHTML = `Total Pages Read: ${totalPages()}`
-    statsPage.append(pagesRead);
+    pagesRead.innerHTML = `Total Pages Read: <span class='stat-number'>${totalPages()}</span>`
+    wrapper.append(pagesRead);
 };
 
 const library = [];

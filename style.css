@@ -107,8 +107,12 @@ input[type='radio'] {
     margin-left: 5px;
 }
 
-.user {
+.stats-toggle {
+    /* position: relative;
+    top: 10px; */
     margin-right: 5px;
+    background: none;
+    border: none;
 }
 
 .bookshelf {
@@ -131,7 +135,8 @@ input[type='radio'] {
 
 .stat-number {
     color: orange;
-    font-weight: bold;
+    font-weight: bolder;
+    margin-left: 5px;
 }
 
 .book {
@@ -141,6 +146,30 @@ input[type='radio'] {
     border-radius: 3px;
     box-shadow: 1px 1px 3px 0px #5d4b4b;
     padding: 5px 5px 1px 5px;
+}
+
+.book-info {
+    padding: 5px 10px 0px 10px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.by {
+    font-size: 14px;
+}
+
+.author {
+    padding-left: 3px;
+}
+
+.pages {
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 3px;
 }
 
 .buttons-wrapper {

@@ -134,20 +134,24 @@ function populate() {
         bk.classList.add('book');
         bookshelf.appendChild(bk);
 
+        const bookInfo = document.createElement('div');
+        bookInfo.classList.add('book-info');
+        bk.append(bookInfo);
+
         const title = document.createElement('div');
         title.classList.add('title');
         title.textContent = book.title;
-        bk.appendChild(title);
+        bookInfo.appendChild(title);
 
-        const author = document.createElement('div');
+        const author = document.createElement('span');
         author.classList.add('author');
-        author.textContent = book.author;
-        bk.appendChild(author);
+        author.innerHTML = `<span class='by'>by</span> ${book.author}`;
+        bookInfo.appendChild(author);
 
         const pages = document.createElement('div');
         pages.classList.add('pages');
         pages.textContent = `${book.pages} pages`;
-        bk.appendChild(pages);
+        bookInfo.appendChild(pages);
 
         const wrapper = document.createElement('div');
         wrapper.classList.add('buttons-wrapper');

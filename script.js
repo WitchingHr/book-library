@@ -2,7 +2,7 @@ const modal = document.querySelector('.modal-bg');
 const button = document.querySelector('.add');
 const modalScale = document.querySelector('.modal');
 
-// Open modal
+// Opens modal
 button.addEventListener('click', () => {
     modal.style.display = 'block';
     modalScale.classList.add('scale');
@@ -23,7 +23,7 @@ window.addEventListener('keydown', (e) => {
     }
 })
 
-// Close modal
+// Closes modal
 window.onclick = function(e) {
     if (e.target == modal) {
         modal.style.display = 'none';
@@ -71,12 +71,12 @@ function populate() {
     const bookshelf = document.querySelector('.bookshelf');
     const books = document.querySelectorAll('.book');
 
-    // Delete books from DOM
+    // Deletes books from DOM
     books.forEach(book => {
         bookshelf.removeChild(book); 
     });
 
-    // Add books to DOM
+    // Adds books to DOM
     library.forEach(book => { 
         const bk = document.createElement('div');
         bk.classList.add('book');
@@ -187,18 +187,20 @@ function removeBook(e) {
     }
 }
 
+// Submit form and add book
 const submitBook = document.querySelector('.submit-book');
 submitBook.addEventListener('click', (e) => {
     e.preventDefault();
 
-    const length = library.length;
+    const length = library.length; // Get value
 
     const form = document.querySelector('form');
     let validity = form.reportValidity();
+
     if (validity) {
         addBookToLibrary();
 
-        // Closes modal after adding a book
+        // Checks value and closes modal
         if (library.length > length) {
             modal.style.display = 'none';
         }

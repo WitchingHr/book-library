@@ -71,7 +71,7 @@ input[type='radio'] {
     height: 26px;
     background-color: #bdfbbd;
     border-radius: 3px;
-    border: 2px solid #5ab590;
+    border: 1px solid #5ab590;
 }
 
 .submit-book:hover {

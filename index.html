@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="modal-bg">
+    <div class="modal-bg" style="display: none;">
         <div class="modal scale">
             <form action="">
                 <div class="text-input">
@@ -32,11 +32,11 @@
                     <div class="radio">
                         <span>
                             <label for="yes">Yes:</label>
-                            <input type="radio" name="read" id="yes" value="yes">
+                            <input type="radio" name="read" id="yes" value="yes" required>
                         </span>
                         <span>
                             <label for="no">No:</label>
-                            <input type="radio" name="read" id="no" value="no">
+                            <input type="radio" name="read" id="no" value="no" required>
                         </span>
                     </div>
                 </div>
@@ -47,11 +47,12 @@
     <div class="container">
         <div class="header">
             <div class="logo">Library</div>
-            <div class="user">User</div>
+            <div class="stats-books">Stats</div>
         </div>
         <div class="bookshelf"></div>
+        <div class="stats"></div>
         <div class="footer">
-            <img src="add.svg" class="add">
+            <img src="add.svg" class="add" title="Add Book">
         </div>
     </div>
 </body>

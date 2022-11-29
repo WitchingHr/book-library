@@ -1,6 +1,8 @@
 const modal = document.querySelector('.modal-bg');
 const button = document.querySelector('.add');
 const modalScale = document.querySelector('.modal');
+const bookshelf = document.querySelector('.bookshelf');
+const statsPage = document.querySelector('.stats');
 
 // Opens modal
 button.addEventListener('click', () => {
@@ -43,6 +45,53 @@ function clearForm() {
     })
 }
 
+const toggle = document.querySelector('.stats-toggle');
+toggle.addEventListener('click', () => {
+    if (toggle.textContent == 'Stats') {
+        toggle.textContent = 'Bookshelf'
+        bookshelf.style.display = 'none';
+        statsPage.style.display = 'block';
+        getStats();
+    } else if (toggle.textContent == 'Bookshelf') {
+        toggle.textContent = 'Stats';
+        statsPage.style.display = 'none';
+        bookshelf.style.display = 'block'
+        statsPage.innerHTML = ''; // Clear page
+    }
+})
+
+function getStats() {
+    const bookTotal = document.createElement('div');
+    bookTotal.innerHTML = `Books: ${library.length}`;
+    statsPage.append(bookTotal);
+
+    const booksRead = document.createElement('div');
+    const readBooks = function() {
+        const read = library.filter(book => book.read === 'yes');
+        return read.length;
+    }
+    booksRead.innerHTML = `Read: ${readBooks()}`;
+    statsPage.append(booksRead);
+
+    const booksUnread = document.createElement('div');
+    const unreadBooks = function() {
+        const unread = library.filter(book => book.read === 'no');
+        return unread.length;
+    }
+    booksUnread.innerHTML = `Unread: ${unreadBooks()}`;
+    statsPage.append(booksUnread);
+
+    const pagesRead = document.createElement('div');
+    const totalPages = function() {
+        const read = library.filter(book => book.read === 'yes');
+        const pages = read.reduce((total, book) => {
+            return total += Number(book.pages);
+        }, 0);
+        return pages;
+    };
+    pagesRead.innerHTML = `Total Pages Read: ${totalPages()}`
+    statsPage.append(pagesRead);
+};
 
 const library = [];
 
@@ -68,7 +117,6 @@ function addBookToLibrary() {
 }
 
 function populate() {
-    const bookshelf = document.querySelector('.bookshelf');
     const books = document.querySelectorAll('.book');
 
     // Deletes books from DOM

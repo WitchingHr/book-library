@@ -118,6 +118,11 @@ input[type='radio'] {
     margin-bottom: 8px;
 }
 
+.stats {
+    flex: 1;
+    background-color: var(--bg-color);
+}
+
 .book {
     border: 1px solid rgb(0, 255, 247);
     margin: 15px;

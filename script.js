@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////
+// LIBRARY
+////////////////////////////////////////////////////////////
+
 const library = (function () {
 
   const library = [];
@@ -215,6 +219,10 @@ const library = (function () {
   }
 })();
 
+////////////////////////////////////////////////////////////
+// STATS PAGE
+////////////////////////////////////////////////////////////
+
 const stats = (function() {
   const _toggle = document.querySelector('.stats-toggle');
   const _bookshelf = document.querySelector('.bookshelf');
@@ -269,7 +277,7 @@ const stats = (function() {
       }, 0);
       return pages;
     };
-    pagesRead.innerHTML = `Total Pages Read: <span class='stat-number'>${totalPages()}</span>`
+    pagesRead.innerHTML = `Total Pages Read: <span class='stat-number'>${totalPages()}</span>`;
     wrapper.append(pagesRead);
   };
 })();

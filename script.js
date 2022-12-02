@@ -1,13 +1,11 @@
 const library = (function () {
 
-    const _library = [];
-    let libraryAPI = [];
+    const library = [];
 
     const modal = document.querySelector('.modal-bg');
     const button = document.querySelector('.add');
     const modalScale = document.querySelector('.modal');
     const bookshelf = document.querySelector('.bookshelf');
-    const statsPage = document.querySelector('.stats');
     // Form:
     const form = document.querySelector('form');
     const formTitle = document.getElementById('book-title');
@@ -15,7 +13,7 @@ const library = (function () {
     const formPages = document.getElementById('book-pages');
     const formRadio = document.getElementsByName('read');
     const submit = document.querySelector('.submit-book');
-
+    // Bind events:
     button.addEventListener('click', openModal);
     window.addEventListener('keydown', openCloseModalByKey);
     window.addEventListener('click', closeModal);
@@ -73,8 +71,7 @@ const library = (function () {
         formRadio.forEach(radio => {
             if (radio.checked) readStatus = radio.value;
         });
-        _library.push(Book(title, author, pages, readStatus));
-        libraryAPI.push(Book(title, author, pages, readStatus));
+        library.push(Book(title, author, pages, readStatus));
         populate();
         clearForm();
     }
@@ -86,7 +83,7 @@ const library = (function () {
             bookshelf.removeChild(book); 
         });
         // Adds books to DOM
-        _library.forEach(book => { 
+        library.forEach(book => { 
             const bk = document.createElement('div');
             bk.classList.add('book');
             bookshelf.appendChild(bk);
@@ -149,14 +146,14 @@ const library = (function () {
     }
 
     function changeReadStatus(e) {
-        const title = e.target.parentNode.parentNode.firstChild.innerHTML;
+        const title = e.target.parentNode.parentNode.firstChild.firstChild.innerHTML;
         if (e.target.classList.contains('read')) {
             e.target.classList.remove('read');
             e.target.classList.add('unread');
             e.target.textContent = 'Unread';
-            for (let i = 0; i < _library.length; i++) {
-                if (_library[i].title === title) {
-                    _library[i].read = 'no';
+            for (let i = 0; i < library.length; i++) {
+                if (library[i].title === title) {
+                    library[i].read = 'no';
                 }
             }
             return;
@@ -164,9 +161,9 @@ const library = (function () {
         e.target.classList.remove('unread');
         e.target.classList.add('read');
         e.target.textContent = 'Read';
-        for (let i = 0; i < _library.length; i++) { 
-            if (_library[i].title === title) {
-                _library[i].read = 'yes';
+        for (let i = 0; i < library.length; i++) { 
+            if (library[i].title === title) {
+                library[i].read = 'yes';
             }
         }
     }
@@ -189,14 +186,13 @@ const library = (function () {
 
     function removeBook(e) {
         const thisBook = e.target.parentNode.parentNode;
-        const title = thisBook.firstChild.innerHTML;
+        const title = thisBook.firstChild.firstChild.innerHTML;
         // Removes book from DOM
         thisBook.parentNode.removeChild(thisBook);
         //Removes book from library array
-        for (let i = _library.length - 1; i >= 0; i--) {
-            if (_library[i].title === title) {
-                _library.splice(i, 1);
-                libraryAPI.splice(i, 1);
+        for (let i = library.length - 1; i >= 0; i--) {
+            if (library[i].title === title) {
+                library.splice(i, 1);
             }
         }
 
@@ -204,70 +200,77 @@ const library = (function () {
 
     function submitBook(e) {
         e.preventDefault();
-        const length = _library.length; // Get value
+        const length = library.length; // Get value
         let validity = form.reportValidity();
         if (validity) {
             addBookToLibrary();
             // Checks value and closes modal
-            if (_library.length > length) {
+            if (library.length > length) {
                 modal.style.display = 'none';
             }
         }
     }
 
     return {
-        libraryAPI
+        library: library
     }
 })();
 
-const toggle = document.querySelector('.stats-toggle');
-toggle.addEventListener('click', () => {
-    if (toggle.textContent == 'Stats') {
-        toggle.textContent = 'Bookshelf'
-        bookshelf.style.display = 'none';
-        statsPage.style.display = 'block';
-        getStats();
-    } else if (toggle.textContent == 'Bookshelf') {
-        toggle.textContent = 'Stats';
-        statsPage.style.display = 'none';
-        bookshelf.style.display = 'block'
-        statsPage.innerHTML = ''; // Clear page
+const stats = (function() {
+    const toggle = document.querySelector('.stats-toggle');
+    const bookshelf = document.querySelector('.bookshelf');
+    const statsPage = document.querySelector('.stats');
+
+    toggle.addEventListener('click', openStatsPage);
+
+    function openStatsPage() {
+        if (toggle.textContent == 'Stats') {
+            toggle.textContent = 'Bookshelf'
+            bookshelf.style.display = 'none';
+            statsPage.style.display = 'block';
+            getStats();
+        } else if (toggle.textContent == 'Bookshelf') {
+            toggle.textContent = 'Stats';
+            statsPage.style.display = 'none';
+            bookshelf.style.display = 'block'
+            statsPage.innerHTML = ''; // Clear page
+        }
     }
-})
 
-function getStats() {
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('stats-wrapper')
-    statsPage.append(wrapper);
+    function getStats() {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('stats-wrapper')
+        statsPage.append(wrapper);
 
-    const bookTotal = document.createElement('div');
-    bookTotal.innerHTML = `Books: <span class='stat-number'>${library.length}</span>`;
-    wrapper.append(bookTotal);
+        const bookTotal = document.createElement('div');
+        bookTotal.innerHTML = `Books: <span class='stat-number'>${library.library.length}</span>`;
+        wrapper.append(bookTotal);
 
-    const booksRead = document.createElement('div');
-    const readBooks = function() {
-        const read = library.filter(book => book.read === 'yes');
-        return read.length;
-    }
-    booksRead.innerHTML = `Read: <span class='stat-number'>${readBooks()}</span>`;
-    wrapper.append(booksRead);
+        const booksRead = document.createElement('div');
+        const readBooks = function() {
+            const read = library.library.filter(book => book.read === 'yes');
+            return read.length;
+        }
+        booksRead.innerHTML = `Read: <span class='stat-number'>${readBooks()}</span>`;
+        wrapper.append(booksRead);
 
-    const booksUnread = document.createElement('div');
-    const unreadBooks = function() {
-        const unread = library.filter(book => book.read === 'no');
-        return unread.length;
-    }
-    booksUnread.innerHTML = `Unread: <span class='stat-number'>${unreadBooks()}</span>`;
-    wrapper.append(booksUnread);
+        const booksUnread = document.createElement('div');
+        const unreadBooks = function() {
+            const unread = library.library.filter(book => book.read === 'no');
+            return unread.length;
+        }
+        booksUnread.innerHTML = `Unread: <span class='stat-number'>${unreadBooks()}</span>`;
+        wrapper.append(booksUnread);
 
-    const pagesRead = document.createElement('div');
-    const totalPages = function() {
-        const read = library.filter(book => book.read === 'yes');
-        const pages = read.reduce((total, book) => {
-            return total += Number(book.pages);
-        }, 0);
-        return pages;
+        const pagesRead = document.createElement('div');
+        const totalPages = function() {
+            const read = library.library.filter(book => book.read === 'yes');
+            const pages = read.reduce((total, book) => {
+                return total += Number(book.pages);
+            }, 0);
+            return pages;
+        };
+        pagesRead.innerHTML = `Total Pages Read: <span class='stat-number'>${totalPages()}</span>`
+        wrapper.append(pagesRead);
     };
-    pagesRead.innerHTML = `Total Pages Read: <span class='stat-number'>${totalPages()}</span>`
-    wrapper.append(pagesRead);
-};
+})();

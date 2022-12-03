@@ -16,6 +16,7 @@ button {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  min-width: 320px;
 }
 
 .modal-bg {
@@ -108,8 +109,8 @@ input[type='radio'] {
 }
 
 .stats-toggle {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   margin-right: 20px;
   border: none;
 }
@@ -139,7 +140,11 @@ input[type='radio'] {
 .stats-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 15px;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 5%;
 }
 
 .stat-number {
@@ -149,9 +154,7 @@ input[type='radio'] {
 }
 
 .book {
-  border: 1px solid rgb(0, 255, 247);
   margin: 15px;
-  background: linear-gradient(to right bottom,white, rgb(123, 255, 0) 70%, rgb(0, 255, 247) 90%);
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0px #5d4b4b;
   padding: 5px 5px 1px 5px;
@@ -159,10 +162,20 @@ input[type='radio'] {
   flex-direction: column;
 }
 
+.book-read {
+  background: linear-gradient(to right bottom,white, rgb(123, 255, 0) 70%, rgb(0, 255, 247) 90%);
+  border: 1px solid rgb(0, 255, 247);
+}
+
+.book-unread {
+  background: linear-gradient(to right bottom,white, rgb(255, 242, 0) 70%, rgb(255, 213, 0) 90%);
+  border: 1px solid rgb(255, 213, 0);
+}
+
 .book-info {
   padding: 5px 10px 0px 10px;
   flex: 1;
-overflow: auto;
+  overflow: auto;
 }
 
 
@@ -198,9 +211,16 @@ overflow: auto;
   border-radius: 4px;
   font-weight: bold;
   font-size: 14px;
-  color: #69ca43;
   background: none;
   border: none;
+}
+
+.button-read {
+  color: #69ca43;
+}
+
+.button-unread {
+  color: #caa843;
 }
 
 .read:hover {

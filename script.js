@@ -92,6 +92,11 @@ const library = (function () {
     library.forEach(book => { 
       const bk = document.createElement('div');
       bk.classList.add('book');
+      if (book.read === 'yes') {
+        bk.classList.add('book-read');
+      } else {
+        bk.classList.add('book-unread');
+      }
       _bookshelf.appendChild(bk);
 
       const bookInfo = document.createElement('div');
@@ -120,11 +125,13 @@ const library = (function () {
       const read = document.createElement('button');
       read.classList.add('book-buttons');
       read.classList.add('read-status');
-      if (book.read == 'yes') {
+      if (book.read === 'yes') {
         read.classList.add('read');
+        read.classList.add('button-read')
         read.textContent = 'Read';
       } else {
         read.classList.add('unread');
+        read.classList.add('button-unread');
         read.textContent = 'Unread';
       }
       wrapper.appendChild(read);  
@@ -132,6 +139,11 @@ const library = (function () {
       const remove = document.createElement('button');
       remove.classList.add('remove');
       remove.classList.add('book-buttons')
+      if (book.read === 'yes') {
+        remove.classList.add('button-read');
+      } else {
+        remove.classList.add('button-unread');
+      }
       remove.textContent = 'Remove';
       wrapper.appendChild(remove);
     });
@@ -154,9 +166,17 @@ const library = (function () {
   function __changeReadStatus(e) {
     const title = e.target.parentNode.parentNode.firstChild.firstChild.innerHTML;
     if (e.target.classList.contains('read')) {
+      // Change hover color:
       e.target.classList.remove('read');
       e.target.classList.add('unread');
       e.target.textContent = 'Unread';
+      // Change button color:
+      e.target.parentNode.childNodes.forEach(button => button.classList.add('button-unread'));
+      e.target.parentNode.childNodes.forEach(button => button.classList.remove('button-read'));
+      // Change backgrond color:
+      e.target.parentNode.parentNode.classList.add('book-unread');
+      e.target.parentNode.parentNode.classList.remove('book-read');
+      // Change book read value:
       for (let i = 0; i < library.length; i++) {
         if (library[i].title === title) {
           library[i].read = 'no';
@@ -164,9 +184,17 @@ const library = (function () {
       }
       return;
     }
+    // Change hover color:
     e.target.classList.remove('unread');
     e.target.classList.add('read');
     e.target.textContent = 'Read';
+    // Change button color:
+    e.target.parentNode.childNodes.forEach(button => button.classList.add('button-read'));
+    e.target.parentNode.childNodes.forEach(button => button.classList.remove('button-unread'));
+    // Change backgrond color:
+    e.target.parentNode.parentNode.classList.add('book-read');
+    e.target.parentNode.parentNode.classList.remove('book-unread');
+    // Change book read value:
     for (let i = 0; i < library.length; i++) { 
       if (library[i].title === title) {
         library[i].read = 'yes';

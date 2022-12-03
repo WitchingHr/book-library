@@ -9,7 +9,7 @@ const library = (function () {
   const _modal = document.querySelector('.modal-bg');
   const _button = document.querySelector('.add');
   const _modalScale = document.querySelector('.modal');
-  const _bookshelf = document.querySelector('.bookshelf');
+  const _bookshelf = document.querySelector('.wrapper');
   // Form:
   const _form = document.querySelector('form');
   const _formTitle = document.getElementById('book-title');

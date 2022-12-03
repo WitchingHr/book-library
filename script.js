@@ -8,6 +8,7 @@ const library = (function () {
 
   const _modal = document.querySelector('.modal-bg');
   const _button = document.querySelector('.add');
+  const _addbutton = document.querySelector('.add-button');
   const _modalScale = document.querySelector('.modal');
   const _bookshelf = document.querySelector('.wrapper');
   // Form:
@@ -19,6 +20,7 @@ const library = (function () {
   const _submit = document.querySelector('.submit-book');
   // Bind events:
   _button.addEventListener('click', __openModal);
+  _addbutton.addEventListener('click', __openModal);
   window.addEventListener('keydown', __openCloseModalByKey);
   window.addEventListener('click', __closeModal);
   _submit.addEventListener('click', __submitBook);
@@ -231,13 +233,15 @@ const stats = (function() {
   _toggle.addEventListener('click', __openStatsPage);
 
   function __openStatsPage() {
-    if (_toggle.textContent == 'Stats') {
-      _toggle.textContent = 'Bookshelf'
+    if (_toggle.classList.contains('chart')) {
+      _toggle.classList.add('shelf');
+      _toggle.classList.remove('chart');
       _bookshelf.style.display = 'none';
       _statsPage.style.display = 'block';
       _getStats();
-    } else if (_toggle.textContent == 'Bookshelf') {
-      _toggle.textContent = 'Stats';
+    } else if (_toggle.classList.contains('shelf')) {
+      _toggle.classList.add('chart');
+      _toggle.classList.remove('shelf');
       _statsPage.style.display = 'none';
       _bookshelf.style.display = 'block'
       _statsPage.innerHTML = ''; // Clear page

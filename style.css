@@ -155,11 +155,16 @@ input[type='radio'] {
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0px #5d4b4b;
   padding: 5px 5px 1px 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .book-info {
   padding: 5px 10px 0px 10px;
+  flex: 1;
+overflow: auto;
 }
+
 
 .title {
   font-size: 20px;
@@ -240,7 +245,7 @@ input[type='radio'] {
 @media only screen and (min-width: 768px) {
   .wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }  
   .add {
     display: none;

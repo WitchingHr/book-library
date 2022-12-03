@@ -313,3 +313,7 @@ const stats = (function() {
     wrapper.append(pagesRead);
   };
 })();
+
+// need to fix:
+// remove leading 0 from page numbers
+// reject adding new identical book

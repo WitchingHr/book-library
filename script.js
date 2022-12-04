@@ -14,6 +14,7 @@ const library = (function () {
   // Form:
   const _form = document.querySelector('form');
   const _formTitle = document.getElementById('book-title');
+  const _error = document.querySelector('.btitle');
   const _formAuthor = document.getElementById('book-author');
   const _formPages = document.getElementById('book-pages');
   const _formRadio = document.getElementsByName('read');
@@ -58,6 +59,7 @@ const library = (function () {
     _formRadio.forEach(button => {
       button.checked = false;
     });
+    _error.classList.remove('error');
   }
 
   function Book(title, author, pages, read) {
@@ -77,7 +79,12 @@ const library = (function () {
     _formRadio.forEach(radio => {
       if (radio.checked) readStatus = Boolean(radio.value);
     });
-    library.push(Book(title, author, pages, readStatus));
+    if (library.some(book => book.title === title)) {
+      _error.classList.add('error');
+      return;
+    } else {
+      library.push(Book(title, author, pages, readStatus));
+    }
     _sortLibrary();
     _populate();
     _clearForm();
@@ -250,7 +257,6 @@ const library = (function () {
   }
 
   function _sortLibrary() {
-    // debugger;
     const ordered = library.sort((a,b) => {
       return Number(Boolean(b.read)) - Number(Boolean(a.read))
     });

@@ -74,7 +74,7 @@ const library = (function () {
   function _addBookToLibrary() {
     const title = _formTitle.value;
     const author = _formAuthor.value;
-    const pages = _formPages.value;
+    const pages = Number(_formPages.value);
     let readStatus = '';
     _formRadio.forEach(radio => {
       if (radio.checked) readStatus = Boolean(radio.value);
@@ -324,7 +324,7 @@ const stats = (function() {
     const totalPages = function() {
       const read = library.library.filter(book => book.read === true);
       const pages = read.reduce((total, book) => {
-        return total += Number(book.pages);
+        return total += book.pages;
       }, 0);
       return pages;
     };
@@ -332,7 +332,3 @@ const stats = (function() {
     wrapper.append(pagesRead);
   };
 })();
-
-// need to fix:
-// remove leading 0 from page numbers
-// reject adding new identical book

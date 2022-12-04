@@ -75,9 +75,10 @@ const library = (function () {
     const pages = _formPages.value;
     let readStatus = '';
     _formRadio.forEach(radio => {
-      if (radio.checked) readStatus = radio.value;
+      if (radio.checked) readStatus = Boolean(radio.value);
     });
     library.push(Book(title, author, pages, readStatus));
+    _sortLibrary();
     _populate();
     _clearForm();
   }
@@ -92,7 +93,7 @@ const library = (function () {
     library.forEach(book => { 
       const bk = document.createElement('div');
       bk.classList.add('book');
-      if (book.read === 'yes') {
+      if (book.read === true) {
         bk.classList.add('book-read');
       } else {
         bk.classList.add('book-unread');
@@ -125,7 +126,7 @@ const library = (function () {
       const read = document.createElement('button');
       read.classList.add('book-buttons');
       read.classList.add('read-status');
-      if (book.read === 'yes') {
+      if (book.read === true) {
         read.classList.add('read');
         read.classList.add('button-read')
         read.textContent = 'Read';
@@ -139,7 +140,7 @@ const library = (function () {
       const remove = document.createElement('button');
       remove.classList.add('remove');
       remove.classList.add('book-buttons')
-      if (book.read === 'yes') {
+      if (book.read === true) {
         remove.classList.add('button-read');
       } else {
         remove.classList.add('button-unread');
@@ -179,9 +180,11 @@ const library = (function () {
       // Change book read value:
       for (let i = 0; i < library.length; i++) {
         if (library[i].title === title) {
-          library[i].read = 'no';
+          library[i].read = false;
         }
       }
+      _sortLibrary();
+      _populate();
       return;
     }
     // Change hover color:
@@ -197,9 +200,11 @@ const library = (function () {
     // Change book read value:
     for (let i = 0; i < library.length; i++) { 
       if (library[i].title === title) {
-        library[i].read = 'yes';
+        library[i].read = true;
       }
     }
+    _sortLibrary();
+    _populate();
   }
 
   function __previewReadStatus(e) {
@@ -242,6 +247,14 @@ const library = (function () {
         _modal.style.display = 'none';
       }
     }
+  }
+
+  function _sortLibrary() {
+    // debugger;
+    const ordered = library.sort((a,b) => {
+      return Number(Boolean(b.read)) - Number(Boolean(a.read))
+    });
+    return library;
   }
 
   return {
@@ -287,7 +300,7 @@ const stats = (function() {
 
     const booksRead = document.createElement('div');
     const readBooks = function() {
-      const read = library.library.filter(book => book.read === 'yes');
+      const read = library.library.filter(book => book.read === true);
       return read.length;
     };
     booksRead.innerHTML = `Read: <span class='stat-number'>${readBooks()}</span>`;
@@ -295,7 +308,7 @@ const stats = (function() {
 
     const booksUnread = document.createElement('div');
     const unreadBooks = function() {
-      const unread = library.library.filter(book => book.read === 'no');
+      const unread = library.library.filter(book => book.read === false);
       return unread.length;
     };
     booksUnread.innerHTML = `Unread: <span class='stat-number'>${unreadBooks()}</span>`;
@@ -303,7 +316,7 @@ const stats = (function() {
 
     const pagesRead = document.createElement('div');
     const totalPages = function() {
-      const read = library.library.filter(book => book.read === 'yes');
+      const read = library.library.filter(book => book.read === true);
       const pages = read.reduce((total, book) => {
         return total += Number(book.pages);
       }, 0);

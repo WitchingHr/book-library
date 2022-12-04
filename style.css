@@ -129,12 +129,12 @@ input[type='radio'] {
 }
 
 .chart {
-  background: url(icons/stats.png);
+  background: url(./icons/stats.png);
   background-size: contain;
 }
 
 .shelf {
-  background: url(icons/books.png);
+  background: url(./icons/books.png);
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
